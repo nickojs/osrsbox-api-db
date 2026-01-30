@@ -1,3 +1,0 @@
-[submodule "eve/schemas"]
-	path = eve/schemas
-	url = https://github.com/osrsbox/schemas.git

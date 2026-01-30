@@ -1,10 +1,10 @@
-#!/bin/bash
-: '
+"""
 Author:  PH01L
 Email:   phoil@osrsbox.com
 Website: https://www.osrsbox.com
 
-Update the API after a osrsbox package update
+Description:
+Database class for MongoDB data properties.
 
 Copyright (c) 2020, PH01L
 
@@ -20,33 +20,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ###############################################################################
-'
-# Get current date
-date=$(date +'%m-%d-%Y')
+"""
+import os
 
-# Dump docker nginx logs
-docker logs osrsbox-api-nginx >> ~/nginx-$date.log 2>&1
 
-# Clean docker environment
-bash clean.sh
-
-# Keep local changes
-git stash
-
-# Update repo from Git
-git pull
-
-# Update submodules (schemas) if needed (uncomment)
-# git submodule update --remote --merge
-
-# Add existing changes (username/password)
-git stash pop
-
-# Build and run docker environment, as a background process
-docker-compose up -d --build
-
-# Update osrsbox data
-docker exec -t osrsbox-api-eve python3 /scripts/mongo_insert_osrsbox.py
-
-# Clear cache after update
-docker exec -t osrsbox-api-nginx rm -rf /etc/nginx/cache/*
+class ConnectionProperties():
+    def __init__(self):
+        self.host = os.getenv("MONGO_HOST", "mongo")
+        self.port = os.getenv("MONGO_PORT", "27017")
+        self.db_name = os.getenv("DATABASE_NAME", "osrsbox")

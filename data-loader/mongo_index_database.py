@@ -27,7 +27,7 @@ from connection_properties import ConnectionProperties
 cp = ConnectionProperties()
 
 # Initialize MongoDB connection
-client = pymongo.MongoClient(f"mongodb://{cp.username}:{cp.password}@osrsbox-api-mongo:{cp.port}/{cp.db_name}")
+client = pymongo.MongoClient(f"mongodb://{cp.host}:{cp.port}/")
 db = client[cp.db_name]
 
 
