@@ -11,13 +11,13 @@ FROM python:3.7-alpine
 LABEL MAINTAINER="PH01L <phoil@osrsbox.com>"
 
 # Set PYTHONPATH environment variable
-ENV PYTHONPATH "${PYTHONPATH}:/var/www/eve/"
+ENV PYTHONPATH "${PYTHONPATH}:/scripts/"
 
 # Set working directory
-WORKDIR /var/www/eve/
+WORKDIR /scripts/
 
 # Install requirements
-ADD ./requirements.txt /var/www/eve/requirements.txt
+ADD ./requirements.txt /scripts/requirements.txt
 RUN pip install -r requirements.txt
 
 # Default entrypoint for data insertion

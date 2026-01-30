@@ -26,6 +26,8 @@ import os
 
 class ConnectionProperties():
     def __init__(self):
-        self.host = os.getenv("MONGO_HOST", "mongo")
-        self.port = os.getenv("MONGO_PORT", "27017")
-        self.db_name = os.getenv("DATABASE_NAME", "osrsbox")
+        self.host = os.environ["MONGO_HOST"]
+        self.port = os.environ["MONGO_PORT"]
+        self.username = os.environ["MONGO_USERNAME"]
+        self.password = os.environ["MONGO_PASSWORD"]
+        self.db_name = os.environ["DATABASE_NAME"]

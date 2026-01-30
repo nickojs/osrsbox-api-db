@@ -10,11 +10,16 @@ import sys
 def clear_database():
     try:
         # Connect to MongoDB
+        username = os.environ['MONGO_USERNAME']
+        password = os.environ['MONGO_PASSWORD']
+        host = os.environ['MONGO_HOST']
+        port = os.environ['MONGO_PORT']
+
         client = pymongo.MongoClient(
-            f"mongodb://{os.getenv('MONGO_HOST', 'mongo')}:{os.getenv('MONGO_PORT', '27017')}/",
+            f"mongodb://{username}:{password}@{host}:{port}/?authSource=admin",
             serverSelectionTimeoutMS=5000
         )
-        db_name = os.getenv('DATABASE_NAME', 'osrsbox')
+        db_name = os.environ['DATABASE_NAME']
 
         print(f"Dropping database: {db_name}")
         client.drop_database(db_name)

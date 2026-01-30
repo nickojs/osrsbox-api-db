@@ -27,7 +27,7 @@ from connection_properties import ConnectionProperties
 cp = ConnectionProperties()
 
 # Initialize MongoDB connection
-client = pymongo.MongoClient(f"mongodb://{cp.host}:{cp.port}/")
+client = pymongo.MongoClient(f"mongodb://{cp.username}:{cp.password}@{cp.host}:{cp.port}/?authSource=admin")
 db = client[cp.db_name]
 
 

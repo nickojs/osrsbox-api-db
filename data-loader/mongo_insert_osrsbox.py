@@ -17,7 +17,7 @@ client = None
 while retry_count < max_retries:
     try:
         client = pymongo.MongoClient(
-            f"mongodb://{cp.host}:{cp.port}/",
+            f"mongodb://{cp.username}:{cp.password}@{cp.host}:{cp.port}/?authSource=admin",
             serverSelectionTimeoutMS=5000
         )
         client.server_info()

@@ -15,11 +15,16 @@ import sys
 def check_database():
     try:
         # Connect to MongoDB
+        username = os.environ['MONGO_USERNAME']
+        password = os.environ['MONGO_PASSWORD']
+        host = os.environ['MONGO_HOST']
+        port = os.environ['MONGO_PORT']
+
         client = pymongo.MongoClient(
-            f"mongodb://{os.getenv('MONGO_HOST', 'mongo')}:{os.getenv('MONGO_PORT', '27017')}/",
+            f"mongodb://{username}:{password}@{host}:{port}/?authSource=admin",
             serverSelectionTimeoutMS=5000
         )
-        db = client[os.getenv('DATABASE_NAME', 'osrsbox')]
+        db = client[os.environ['DATABASE_NAME']]
 
         # Check if items collection exists and has data
         if 'items' in db.list_collection_names():

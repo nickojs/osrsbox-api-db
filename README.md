@@ -8,6 +8,16 @@ A simple MongoDB bootstrap for OSRS (Old School RuneScape) game data. This repos
 
 This is a **dump database** for read-only purposes - no authentication, no API server, just data.
 
+## Setup
+
+Copy the example environment file and configure for your environment:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` to configure your MongoDB connection settings.
+
 ## Usage
 
 ### First Run (Load Data)
@@ -56,12 +66,18 @@ docker-compose down
 
 ## Configuration
 
-Edit `.env` to configure:
+Edit `.env` to configure for your environment:
 
 ```bash
-DATABASE_NAME=osrsbox        # Database name
+# MongoDB Configuration
+MONGO_HOST=mongo             # MongoDB host (use 'mongo' for Docker, 'localhost' for external)
 MONGO_PORT=27017             # MongoDB port
-FORCE_DATA_LOAD=false        # Set to true to rebuild data
+MONGO_USERNAME=osrsbox_user  # MongoDB username
+MONGO_PASSWORD=osrsbox_pass  # MongoDB password
+DATABASE_NAME=osrsbox        # Database name
+
+# Data Loading
+FORCE_DATA_LOAD=false        # Set to true to drop and rebuild data
 ```
 
 ## Database Collections
